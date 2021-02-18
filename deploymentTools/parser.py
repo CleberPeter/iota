@@ -60,10 +60,14 @@ class _parser:
         self.printDebug("parsing parameters ...")
         self.printDebug("Project: " + self.arguments.uuidProject)
 
+        self.printDebug("parsing file ...")
         if self.arguments.type == "bin":
             if parseFileExtension(self.arguments.files, "bin"):
                 try:
-                    dirPath = os.path.dirname(os.path.realpath(__file__)) + "/"
+                    if file_name[0] == "/":
+                        dirPath = ""
+                    else:
+                        dirPath = os.path.dirname(os.path.realpath(__file__)) + "/"
                     file = open(dirPath+self.arguments.files, "rb")
                 except:
                     print("can't open file.")
@@ -88,7 +92,10 @@ class _parser:
                     return False
 
                 try:
-                    dirPath = os.path.dirname(os.path.realpath(__file__)) + "/"
+                    if file_name[0] == "/":
+                        dirPath = ""
+                    else:
+                        dirPath = os.path.dirname(os.path.realpath(__file__)) + "/"
                     file = open(dirPath+file_name, "rb")
                 except:
                     print("can't open file.")
